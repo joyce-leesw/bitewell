@@ -1,10 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from bitewell import generate_recipes
-# from mangum import Mangum
+from mangum import Mangum
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-# handler = Mangum(app)
+handler = Mangum(app)
 MAX_INPUT_LENGTH = 50
 
 app.add_middleware(
