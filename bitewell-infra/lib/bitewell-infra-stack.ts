@@ -1,8 +1,8 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import * as lambda from 'aws-cdk-lib/aws-lambda'
-import * as dotenv from 'dotenv';
-import * as apiGateway from 'aws-cdk-lib/aws-apigateway'
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as dotenv from "dotenv";
+import * as apiGateway from "aws-cdk-lib/aws-apigateway";
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ export class BitewellInfraStack extends cdk.Stack {
 
     const layer = new lambda.LayerVersion(this, "BaseLayer", {
       code: lambda.Code.fromAsset("lambda_base_layer/layer.zip"),
-      compatibleRuntimes: [lambda.Runtime.PYTHON_3_11]
+      compatibleRuntimes: [lambda.Runtime.PYTHON_3_11],
     });
 
     const apiLambda = new lambda.Function(this, "ApiFunction", {
@@ -26,11 +26,11 @@ export class BitewellInfraStack extends cdk.Stack {
     });
 
     const bitwellApi = new apiGateway.RestApi(this, "RestApi", {
-      restApiName: "Bitewell API"
+      restApiName: "Bitewell API",
     });
 
     bitwellApi.root.addProxy({
       defaultIntegration: new apiGateway.LambdaIntegration(apiLambda),
-    })
+    });
   }
 }

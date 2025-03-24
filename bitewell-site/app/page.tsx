@@ -6,12 +6,9 @@ export default function Home() {
     <div>
       <Head>
         <title>Bitewell - AI Generated Recipes</title>
-        <meta
-          name="description"
-          content="Generate quick and healthy recipes"
-        />
+        <meta name="description" content="Generate quick and healthy recipes" />
       </Head>
       <Bitewell />
     </div>
-  )
+  );
 }

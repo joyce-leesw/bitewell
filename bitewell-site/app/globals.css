@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
-html, body {
+html,
+body {
   @apply bg-emerald-950;
 }
