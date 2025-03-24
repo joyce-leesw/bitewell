@@ -27,7 +27,7 @@ def generate_recipes(ingredients: str) -> str:
 	client = OpenAI(
 	  api_key=os.environ.get("OPENAI_API_KEY"),
 	)
-	prompt = f"I have {ingredients} in my fridge, generate healthy recipes using those ingredients. Return the results in an array of objects with properties such as, name, total time, and steps"
+	prompt = f"I have {ingredients} in my fridge, generate healthy recipes using those ingredients. Return the results in an array of objects with properties such as, name, total_time, and steps"
 
 	response = client.responses.create(
 		model="gpt-3.5-turbo",
