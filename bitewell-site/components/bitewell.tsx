@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import Results from "./results";
 import Form from "./form";
+import logo from "../public/bitewell.png";
+import Image from "next/image";
 
 type Recipe = {
 	name: string;
@@ -59,6 +61,7 @@ const Bitewell: React.FC = () => {
 			<div className="w-lg m-auto p-2">
 				<div className="bg-gray-100 p-6 rounded-md">
 					<div className="text-center my-6">
+						<Image src={logo} width={200} className="mx-auto block" alt="Bitewell logo"/>
 						<h1 className={`${gradientTextStyle} text-3xl font-light`}>Bitewell</h1>
 						<div className={`${gradientTextStyle} text-lg`}>Your AI recipes assistant</div>
 					</div>
