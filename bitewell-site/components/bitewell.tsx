@@ -32,15 +32,15 @@ const Bitewell: React.FC = () => {
 
   const onReceived = (data: { recipes: string }) => {
     console.log("recipes unparsed", data.recipes);
-    let cleanedRecipes;
     if (typeof data.recipes === "string") {
-      const cleanedString = data.recipes
-        .replace(/```json/g, "")
-        .replace(/```/g, "")
-        .trim();
-      cleanedRecipes = JSON.parse(cleanedString);
-      setRecipes(cleanedRecipes);
-      console.log("recipes ready", recipes);
+      const jsonArray = data.recipes.match(/\[.*\]/s);
+      if (jsonArray) {
+        const cleanedRecipes = JSON.parse(jsonArray[0]);
+        setRecipes(cleanedRecipes);
+      } else {
+        console.error("No valid JSON array found");
+        setRecipes([]);
+      }
       setResults(true);
       setIsPending(false);
     }
