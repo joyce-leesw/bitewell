@@ -52,13 +52,13 @@ const Results: React.FC<Props> = ({ prompt, recipes, onBack }) => {
               {openIndex === index && (
                 <div className="bg-white p-4">
                   <b className="text-slate-500 mb-4 text-sm">Steps:</b>
-                  <ul className="list-none space-y-2">
+                  <ol className="list-decimal pl-5 space-y-2">
                     {recipe.steps.map((step, idx) => (
                       <li key={idx} className="text-gray-700">
                         {step}
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                 </div>
               )}
             </div>
