@@ -25,12 +25,12 @@ export class BitewellInfraStack extends cdk.Stack {
       },
     });
 
-    const bitwellApi = new apiGateway.RestApi(this, "RestApi", {
-      restApiName: "Bitewell API",
+    const functionUrl = apiLambda.addFunctionUrl({
+      authType: lambda.FunctionUrlAuthType.NONE,
     });
 
-    bitwellApi.root.addProxy({
-      defaultIntegration: new apiGateway.LambdaIntegration(apiLambda),
+    new cdk.CfnOutput(this, "FunctionUrl", {
+      value: functionUrl.url,
     });
   }
 }

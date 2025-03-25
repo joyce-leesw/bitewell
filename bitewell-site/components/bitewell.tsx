@@ -20,7 +20,7 @@ const Bitewell: React.FC = () => {
   const characterLimit = 50;
 
   const ENDPOINT: string =
-    "https://ecx6sb9wme.execute-api.eu-west-2.amazonaws.com/prod/generate_recipes";
+    "https://mzgohuey4gygbj7igupfrrgubu0yxtjn.lambda-url.eu-west-2.on.aws/generate_recipes";
 
   const onSubmit = () => {
     setIsPending(true);
