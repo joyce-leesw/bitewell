@@ -17,6 +17,7 @@ const Bitewell: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isPending, setIsPending] = useState(false);
   const [results, setResults] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const characterLimit = 50;
 
   const ENDPOINT: string =
@@ -37,11 +38,12 @@ const Bitewell: React.FC = () => {
       if (jsonArray) {
         const cleanedRecipes = JSON.parse(jsonArray[0]);
         setRecipes(cleanedRecipes);
+        setResults(true);
       } else {
         console.error("No valid JSON array found");
         setRecipes([]);
+        setError("Couldn't parse recipes. Please try again.");
       }
-      setResults(true);
       setIsPending(false);
     }
   };
@@ -50,6 +52,7 @@ const Bitewell: React.FC = () => {
     setPrompt("");
     setResults(false);
     setIsPending(false);
+    setError(null);
   };
 
   const gradientTextStyle =
@@ -73,7 +76,27 @@ const Bitewell: React.FC = () => {
               Your AI recipes assistant
             </div>
           </div>
-          {!results ? (
+
+          {isPending && (
+            <div className="flex justify-center items-center my-4">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-green-600 border-solid"></div>
+              <span className="ml-4 text-green-700">Loading...</span>
+            </div>
+          )}
+
+          {error && (
+            <div className="text-red-600 text-center mb-4">
+              <p>{error}</p>
+              <button
+                onClick={onReset}
+                className="text-white bg-gradient-to-r from-red-300 to-red-500 w-full p-2 rounded-md text-lg"
+              >
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {!results && !isPending && !error && (
             <Form
               prompt={prompt}
               setPrompt={setPrompt}
@@ -81,7 +104,9 @@ const Bitewell: React.FC = () => {
               isPending={isPending}
               characterLimit={characterLimit}
             />
-          ) : (
+          )}
+
+          {results && !isPending && !error && (
             <Results prompt={prompt} recipes={recipes} onBack={onReset} />
           )}
         </div>
